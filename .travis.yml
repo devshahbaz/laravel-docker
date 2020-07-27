@@ -1,0 +1,29 @@
+sudo: required
+language: php
+services:
+  - docker
+
+before_install:
+   - docker build -t 001993/laravel-app .
+
+after_success:
+  - docker build -t 001993/laravel-app .
+  - docker build -t 001993/laravel-nginx -f ./Dockerfile_Nginx .
+  # Login to docker CI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push build image to docker
+  - docker push 001993/laravel-app
+  - docker push 001993/laravel-nginx
+
+# Deploy to AWS 
+deploy:
+  provider: elasticbeanstalk
+  regin: us-east-1
+  app: multi-docker-demo
+  env: MultiDockerDemo-env
+  bucket_name: elasticbeanstalk-us-east-1-440234986602
+  bucket_path: multi-docker-demo
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
