@@ -5,6 +5,8 @@ services:
 
 before_install:
    - docker build -t 001993/laravel-app .
+script:
+  - docker run -e CI=true 001993/laravel-app composer install
 
 after_success:
   - docker build -t 001993/laravel-app .
