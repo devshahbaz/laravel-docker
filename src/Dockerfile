@@ -27,14 +27,14 @@ RUN apk add autoconf && pecl install -o -f redis \
 
 COPY ./config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
-# RUN addgroup -g 1000 -S www && \
-#     adduser -u 1000 -S www -G www
+RUN addgroup -g 1000 -S www && \
+    adduser -u 1000 -S www -G www
 
-# USER www
+USER www
 
-# COPY --chown=www:www . /var/www
+COPY --chown=www:www . /var/www
 
-COPY . .
+# COPY . .
 RUN composer install
 RUN php artisan key:generate
 
