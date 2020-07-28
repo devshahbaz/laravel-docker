@@ -35,9 +35,7 @@ USER www
 COPY --chown=www:www . /var/www
 
 COPY . .
-RUN composer install
-
-RUN php artisan key:generate
+RUN composer install && php artisan key:generate
 
 
 EXPOSE 9000
