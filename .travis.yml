@@ -1,21 +1,24 @@
 sudo: required
-language: php
+
+language: generic
+
 services:
   - docker
 
 before_install:
-   - docker build -t 001993/laravel-app .
+   - docker build -t 001993/lara-dock .
+
+
 script:
-  - docker run -e CI=true 001993/laravel-app composer install
+  - docker run -e CI=true 001993/lara-dock  composer install && php artisan test
 
 after_success:
-  - docker build -t 001993/laravel-app .
-  - docker build -t 001993/laravel-nginx -f ./Dockerfile_Nginx .
+  - docker build -t 001993/lara-dock .
+
   # Login to docker CI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push build image to docker
-  - docker push 001993/laravel-app
-  - docker push 001993/laravel-nginx
+  - docker push 001993/lara-dock
 
 # Deploy to AWS 
 deploy:
