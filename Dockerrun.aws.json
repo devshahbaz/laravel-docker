@@ -1,0 +1,27 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+      {
+        "name": "app",
+        "image": "001993/lara-dock",
+        "hostname": "app",
+        "essential": false,
+        "memory": 128
+      },
+      {
+        "name": "nginx",
+        "image": "001993/lara-server",
+        "hostname": "nginx",
+        "essential": true,
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "containerPort": 80
+          }
+        ],
+        "links": ["app"],
+        "memory": 128
+      }
+    ]
+  }
+  
