@@ -14,10 +14,6 @@ cache:
     - vendor
     - node_modules
 
-install:
-  - docker exec 001993/lara-dock composer self-update
-  - docker exec 001993/lara-dock composer install --no-interaction
-
 script:
   - docker run -e CI=true 001993/lara-dock php artisan test
 
