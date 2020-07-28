@@ -13,7 +13,6 @@ script:
   - docker run -e CI=true 001993/lara-dock php artisan test
 
 after_success:
-  - docker build -t 001993/lara-dock -f ./src/Dockerfile ./src
   - docker build -t 001993/lara-server .
   # Login to docker CI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
