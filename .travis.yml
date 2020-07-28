@@ -10,11 +10,10 @@ before_install:
 
 
 script:
-  - docker run -it 001993/lara-dock  composer install && php artisan test
+  - docker run -it 001993/lara-dock php artisan test
 
 after_success:
   - docker build -t 001993/lara-dock .
-
   # Login to docker CI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push build image to docker
