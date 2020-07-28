@@ -34,10 +34,9 @@ USER www
 
 COPY --chown=www:www . /var/www
 
-COPY ./composer.json ./
+COPY . .
 RUN composer install
 
-COPY . .
 RUN php artisan key:generate
 
 
