@@ -14,7 +14,7 @@ script:
 
 after_success:
   - docker build -t 001993/lara-dock -f Dockerfile.prod .
-  - docker build -t 001993/lara-server -f Dockerfile_Nginx ./webserver
+  - docker build -t 001993/lara-server -f Dockerfile_Nginx .
   # Login to docker CI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push build image to docker
@@ -26,7 +26,7 @@ deploy:
   provider: elasticbeanstalk
   regin: us-east-2
   app: multi-docker-demo
-  env: MultiDockerDemo-env
+  env: MultiDockerDemo-env-1
   bucket_name: elasticbeanstalk-us-east-2-440234986602
   bucket_path: docker-demo
   on:
