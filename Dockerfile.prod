@@ -25,13 +25,13 @@ RUN apk add autoconf && pecl install -o -f redis \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable redis && apk del autoconf
 
-COPY . .
-RUN composer install --no-scripts --no-autoloader
-
 COPY ./config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
 USER www
 
 COPY --chown=www:www . /var/www
+
+COPY . .
+RUN composer install
 
 EXPOSE 9000
