@@ -34,7 +34,7 @@ COPY ./config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
 # COPY --chown=www:www . /var/www
 
-# COPY . .
+COPY . .
 RUN composer install
 RUN php artisan key:generate
 
