@@ -8,11 +8,11 @@ services:
 
 before_install:
    - docker build -t 001993/lara-dock .
+   - docker exec 001993/lara-dock composer install
 
 cache:
   directories:
     - vendor
-    - node_modules
 
 script:
   - docker run -e CI=true 001993/lara-dock php artisan test
